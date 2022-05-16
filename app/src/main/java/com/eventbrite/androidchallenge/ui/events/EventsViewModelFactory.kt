@@ -14,7 +14,7 @@ class EventsViewModelFactory
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(EventsViewModel::class.java)) {
-            return EventsViewModel(EventsRepository(makeEventsService()), Dispatchers.Main ) as T
+            return EventsViewModel(EventsRepository(makeEventsService(),Dispatchers.Main)) as T
         } else {
             throw IllegalArgumentException("ViewModel $modelClass not supported")
         }

@@ -25,7 +25,7 @@ class EventsViewModelTest {
 private  val dispatcher = UnconfinedTestDispatcher()
 
     @Mock
-    private var eventsRepository = EventsRepository(makeEventsService())
+    private var eventsRepository = EventsRepository(makeEventsService(),Dispatchers.Main)
 
   /*  @InjectMocks
     val viewModel = EventsViewModel(eventsRepository,Dispatchers.Default)
@@ -46,7 +46,7 @@ private  val dispatcher = UnconfinedTestDispatcher()
     @Test
     fun template() = runTest(dispatcher) {
 
-        val viewModel = EventsViewModel(eventsRepository,Dispatchers.Main)
+        val viewModel = EventsViewModel(eventsRepository)
 
        launch(Dispatchers.Main) { viewModel.fetch() }
 
