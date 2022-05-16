@@ -37,17 +37,19 @@ class EventsViewModel(
                 }
 
         }
+
+  private  fun handleResponse(response: Response<EventsDto>): ResourceState<EventsDto>? {
+
+        if (response.isSuccessful) {
+            response.body()?.let { values ->
+                return ResourceState.Sucess(values)
+            }
+        }
+        return ResourceState.Error(response.message())
+    }
     }
 
-    private fun handleResponse(response: Response<EventsDto>): ResourceState<EventsDto>? {
 
-            if (response.isSuccessful) {
-                response.body()?.let { values ->
-                    return ResourceState.Sucess(values)
-                }
-            }
-            return ResourceState.Error(response.message())
-        }
 
 
 
