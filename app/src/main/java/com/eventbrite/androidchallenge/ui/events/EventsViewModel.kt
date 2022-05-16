@@ -20,15 +20,12 @@ class EventsViewModel(
 
     val listEvents: MutableLiveData<ResourceState<EventsDto>> = _listEvents
 
-    private val defaultDispatcher: CoroutineDispatcher = Dispatchers.Main
-
     init {
         fetch()
     }
 
     fun fetch() = viewModelScope.launch {
-        coroutineScope {
-            async(defaultDispatcher) {
+
                 try {
                     val response = eventsRepository.listOrganizerEvents()
                     _listEvents.value = handleResponse(response)
@@ -38,7 +35,7 @@ class EventsViewModel(
                         else -> _listEvents.value = ResourceState.Error("falha nos dados")
                     }
                 }
-            }
+
         }
     }
 
@@ -52,7 +49,7 @@ class EventsViewModel(
             return ResourceState.Error(response.message())
         }
 
-    }
+
 
 
 
